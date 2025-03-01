@@ -1,0 +1,6 @@
+@AMPL_Backend_HostAddress = http://localhost:5135
+
+GET {{AMPL_Backend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

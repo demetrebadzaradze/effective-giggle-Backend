@@ -2,6 +2,8 @@
 {
     public class RecuestProductList
     {
+        public double TotalTime { get; set; }
+        public double TotalMaterial { get; set; }
         public string[] Name {get; set; }
         public double[] Material { get; set; }
         public double[] Time { get; set; }
@@ -21,6 +23,14 @@
                 result[i] = new Product(Name[i], Material[i], Time[i], Value[i]);
             }
             return result;
+        }
+        public double IntoTimeExeption()
+        {   
+            return TotalTime;
+        }
+        public double IntoMaterialExeption()
+        {
+            return TotalMaterial;
         }
     }
 }

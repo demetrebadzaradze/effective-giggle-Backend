@@ -1,6 +1,6 @@
 string[] AMPLFiles = new string[]{
-    @"D:\Demetre Badzgaradze\ProgramingProjects\AMPL-Backend\AMPLFiles\Eq.dat",
-    @"D:\Demetre Badzgaradze\ProgramingProjects\AMPL-Backend\AMPLFiles\Eq.mod"
+    @"C:\Users\User\Desktop\DemetreBadzgaradze\effective-giggle-Backend\AMPLFiles\Eq.dat",
+    @"C:\Users\User\Desktop\DemetreBadzgaradze\effective-giggle-Backend\AMPLFiles\Eq.mod"
 };
 
 foreach (var filepath in AMPLFiles)
@@ -16,7 +16,8 @@ builder.Services.AddCors(op =>
         policy =>
         {
             policy.WithOrigins("http://localhost:8000/",
-                               "http://localhost:8000")
+                               "http://localhost:8000",
+                               "http://127.0.0.1:5500")
                                     .AllowAnyHeader()
                                     .AllowAnyMethod()
                                     .AllowAnyHeader();

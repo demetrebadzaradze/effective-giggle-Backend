@@ -13,8 +13,8 @@ namespace AMPL_Backend.Controllers
     {
         AMPLEquation ampl = new AMPLEquation();
         AMPL a = new AMPL();
-        private string dataFilePath = @"D:\Demetre Badzgaradze\ProgramingProjects\AMPL-Backend\AMPLFiles\Eq.dat";
-        private string modelFilePath = @"D:\Demetre Badzgaradze\ProgramingProjects\AMPL-Backend\AMPLFiles\Eq.mod";
+        private string dataFilePath = @"C:\Users\User\Desktop\DemetreBadzgaradze\effective-giggle-Backend\AMPLFiles\Eq.dat";
+        private string modelFilePath = @"C:\Users\User\Desktop\DemetreBadzgaradze\effective-giggle-Backend\AMPLFiles\Eq.mod";
         public double AvalableMaterial { get; set; } = 1700;
         public double AvalableTime { get; set; } = 160;
         [HttpGet]
@@ -46,39 +46,17 @@ namespace AMPL_Backend.Controllers
 
             return Ok(profit);
         }
-        //[HttpPost("random-equetion-specify")]
-        //public IActionResult RandomEquetion([Required][FromBody] Product[] products)
-        //{
-        //    Console.WriteLine(Request.ToString()); 
-        //    Console.WriteLine(products.Length);
-        //    EquationResult[] results = new EquationResult[products.Length];
-        //    Product[] p = products;
-            
-        //    AMPLEquation.DefineDataFile(dataFilePath, p);
-        //    AMPLEquation.DefineModelFile(modelFilePath, p, AvalableMaterial, AvalableTime);
-
-        //    a.SetOption("solver", "minos");
-        //    a.Read(modelFilePath);
-        //    a.ReadData(dataFilePath);
-        //    a.Solve();
-
-        //    var profit = a.GetValue("profit").Dbl;
-
-        //    for (int i = 0; i < p.Length; i++)
-        //    {
-        //        results[i] = p[i].GetEquationResult((int)a.GetValue(p[i].Name).Dbl);
-        //    }
-
-        //    return Ok(results);
-        //}
         [HttpPost("random-equetion-specify")]
         public IActionResult RandomEquetion([Required][FromBody] RecuestProductList products)
         {
             Product[] p = products.IntoProductList();
             EquationResult[] results = new EquationResult[p.Length];
 
+            double totalTime = products.IntoTimeExeption();
+            double totalMaterial = products.IntoMaterialExeption();
+
             AMPLEquation.DefineDataFile(dataFilePath, p);
-            AMPLEquation.DefineModelFile(modelFilePath, p, AvalableMaterial, AvalableTime);
+            AMPLEquation.DefineModelFile(modelFilePath, p, totalMaterial, totalTime);
 
             a.SetOption("solver", "minos");
             a.Read(modelFilePath);

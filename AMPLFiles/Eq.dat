@@ -1,0 +1,8 @@
+param Chairmaterial := 3; 
+param Chairprice := 20; 
+param Chairtime := 0.2 ;  
+
+param Tablematerial := 4; 
+param Tableprice := 30; 
+param Tabletime := 0.5 ;  
+

@@ -46,13 +46,37 @@ namespace AMPL_Backend.Controllers
 
             return Ok(profit);
         }
-        [HttpPost("random-equetion-specify")]
-        public IActionResult RandomEquetion([Required][FromBody] Product[] products)
-        {
-            Console.WriteLine(products.Length);
-            EquationResult[] results = new EquationResult[products.Length];
-            Product[] p = products;
+        //[HttpPost("random-equetion-specify")]
+        //public IActionResult RandomEquetion([Required][FromBody] Product[] products)
+        //{
+        //    Console.WriteLine(Request.ToString()); 
+        //    Console.WriteLine(products.Length);
+        //    EquationResult[] results = new EquationResult[products.Length];
+        //    Product[] p = products;
             
+        //    AMPLEquation.DefineDataFile(dataFilePath, p);
+        //    AMPLEquation.DefineModelFile(modelFilePath, p, AvalableMaterial, AvalableTime);
+
+        //    a.SetOption("solver", "minos");
+        //    a.Read(modelFilePath);
+        //    a.ReadData(dataFilePath);
+        //    a.Solve();
+
+        //    var profit = a.GetValue("profit").Dbl;
+
+        //    for (int i = 0; i < p.Length; i++)
+        //    {
+        //        results[i] = p[i].GetEquationResult((int)a.GetValue(p[i].Name).Dbl);
+        //    }
+
+        //    return Ok(results);
+        //}
+        [HttpPost("random-equetion-specify")]
+        public IActionResult RandomEquetion([Required][FromBody] RecuestProductList products)
+        {
+            Product[] p = products.IntoProductList();
+            EquationResult[] results = new EquationResult[p.Length];
+
             AMPLEquation.DefineDataFile(dataFilePath, p);
             AMPLEquation.DefineModelFile(modelFilePath, p, AvalableMaterial, AvalableTime);
 
